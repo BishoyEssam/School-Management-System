@@ -2,7 +2,7 @@
 package org.school.app
 
 import akka.actor.{ActorRef, ActorSystem, Props}
-import org.school.app.actors.{AddCourse, AddExamSchedule, AddStudent, AddTeacher, CourseActor, ExamScheduleActor, GetAllCourses, GetAllExamSchedule, GetAllStudents, GetAllTeachers, RemoveCourse, RemoveExamSchedule, RemoveStudent, StudentActor, TeacherActor, UpdateStudent, UpdateTeacher}
+import org.school.app.actors._
 import org.school.app.dao.Database
 //import org.school.app.gui.SchoolManagementGUI
 
@@ -18,9 +18,9 @@ object SchoolManagementSystem extends App {
   val teacherActor: ActorRef = system.actorOf(Props[TeacherActor], "teacherActor")
   val courseActor: ActorRef = system.actorOf(Props[CourseActor], "courseActor")
   val examScheduleActor: ActorRef = system.actorOf(Props[ExamScheduleActor], "examScheduleActor")
-
+  val attendanceActor: ActorRef = system.actorOf(Props[AttendanceActor], "attendanceActor")
   //test all actors
-    studentActor ! GetAllStudents
+
 //  studentActor ! UpdateStudent(Student(3,"Bishoy" ,"A+"))
 //  studentActor ! RemoveStudent(4)
 //  studentActor ! AddStudent(Student(2, "Mary" , "A"))
@@ -64,5 +64,5 @@ object SchoolManagementSystem extends App {
 //  examScheduleActor ! AddExamSchedule(ExamSchedule(4,"2024/1/6","10:30 AM"))
 //  examScheduleActor ! AddExamSchedule(ExamSchedule(5,"2024/1/9","10:30 AM"))
 //  examScheduleActor ! AddExamSchedule(ExamSchedule(6,"2024/1/10","10:30 AM"))
-
+  attendanceActor ! AddAttendance(Attendance(1,"2024/1/4",1,1))
 }

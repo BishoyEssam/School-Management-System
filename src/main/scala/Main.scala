@@ -1,5 +1,7 @@
+import org.school.app.SchoolManagementSystem
+
 object Main {
   def main(args: Array[String]): Unit = {
-    println("Hello world!")
+    SchoolManagementSystem.main(args)
   }
 }
