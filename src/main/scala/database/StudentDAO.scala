@@ -17,7 +17,14 @@ object StudentDAO {
       preparedStatement.setString(2, student.name)
       preparedStatement.setString(3, student.grade)
       preparedStatement.executeUpdate()
-    } finally {
+      // Print This To Make Sure That The Student is Added
+      println(s"Student ${student.id} Added Succesfuly ")
+
+    } catch {
+      case e: Exception =>
+        println("This id Is Already Exists")
+    }
+    finally {
       connection.close()
     }
   }
@@ -32,7 +39,12 @@ object StudentDAO {
       preparedStatement.setString(2, student.grade)
       preparedStatement.setInt(3, student.id)
       preparedStatement.executeUpdate()
-    } finally {
+      // Print This To Make Sure That The Student is Updated
+      println(s"Student ${student.id} Updated Succesfuly ")
+    } catch {
+      case e: Exception =>
+        println("This id Not Exists")
+    }finally {
       connection.close()
     }
   }
@@ -66,7 +78,12 @@ object StudentDAO {
       val preparedStatement: PreparedStatement = connection.prepareStatement(query)
       preparedStatement.setInt(1, studentId)
       preparedStatement.executeUpdate()
-    } finally {
+      // Print This To Make Sure That The Student is Deleted
+      println(s"Student ${studentId} Deleted Succesfuly ")
+    } catch {
+      case e: Exception =>
+        println("This id Not Exists")
+    }finally {
       connection.close()
     }
   }

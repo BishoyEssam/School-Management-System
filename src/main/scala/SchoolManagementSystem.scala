@@ -21,9 +21,9 @@ object SchoolManagementSystem extends App {
   val attendanceActor: ActorRef = system.actorOf(Props[AttendanceActor], "attendanceActor")
   //test all actors
 
-//  studentActor ! UpdateStudent(Student(3,"Bishoy" ,"A+"))
+//  studentActor ! UpdateStudent(Student(20,"Hoda Hamed" ,"B+"))
 //  studentActor ! RemoveStudent(4)
-//  studentActor ! AddStudent(Student(2, "Mary" , "A"))
+  studentActor ! AddStudent(Student(21, "Hoda" , "A+"))
 //  studentActor ! AddStudent(Student(3, "Peter" , "B"))
 //  studentActor ! AddStudent(Student(4, "Paul" , "C"))
 //  studentActor ! AddStudent(Student(5, "Jane" , "D"))
@@ -56,7 +56,6 @@ object SchoolManagementSystem extends App {
 //  courseActor ! AddCourse(Course(9, "Computer Science" ))
 //  courseActor ! AddCourse(Course(10, "Home Economics" ))
 
-
 //    examScheduleActor ! RemoveExamSchedule(4)
 //    examScheduleActor ! GetAllExamSchedule
 //  examScheduleActor ! AddExamSchedule(ExamSchedule(2,"2024/1/4","10:30 AM"))
@@ -64,5 +63,5 @@ object SchoolManagementSystem extends App {
 //  examScheduleActor ! AddExamSchedule(ExamSchedule(4,"2024/1/6","10:30 AM"))
 //  examScheduleActor ! AddExamSchedule(ExamSchedule(5,"2024/1/9","10:30 AM"))
 //  examScheduleActor ! AddExamSchedule(ExamSchedule(6,"2024/1/10","10:30 AM"))
-  attendanceActor ! AddAttendance(Attendance(1,"2024/1/4",1,1))
+//  attendanceActor ! AddAttendance(Attendance(3,"2024/1/4",3,1))
 }

@@ -17,6 +17,11 @@ object ExamScheduleDAO {
       preparedStatement.setString(2, examSchedule.date)
       preparedStatement.setString(3, examSchedule.time)
       preparedStatement.executeUpdate()
+      // Print This To Make Sure That The ExamSchedule is Added
+      println(s"ExamSchedule ${examSchedule.courseId} Added Succesfuly ")
+    } catch {
+      case e: Exception =>
+        println("This id Is Already Exists")
     } finally {
       connection.close()
     }
@@ -30,7 +35,12 @@ object ExamScheduleDAO {
       val preparedStatement: PreparedStatement = connection.prepareStatement(query)
       preparedStatement.setInt(1, courseId)
       preparedStatement.executeUpdate()
-    } finally {
+      // Print This To Make Sure That The ExamSchedule is Deleted
+      println(s"ExamSchedule ${courseId} Deleted Succesfuly ")
+    } catch {
+      case e: Exception =>
+        println("This id Not Exists")
+    }finally {
       connection.close()
     }
   }

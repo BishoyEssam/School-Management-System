@@ -13,14 +13,10 @@ class StudentActor extends Actor {
   //Receive Method Specifies How The Actor Should React To Different Types Of Messages.
   def receive: Receive = {
 
-
-
     // Handel Message Called "AddStudent"
     case AddStudent(student) =>
       // This Line calling addStudent Function To INSERT New Student To Students Table
       studentDAO.addStudent(  student)
-      // Print This To Make Sure That The Student is Added
-      println(s"Student ${student.id} Added Succesfuly ")
       // Add New Student to the List "students"
       students = students :+ student
       // Finally, It Sends The Updated List Of Students Back To The Sender
@@ -32,8 +28,6 @@ class StudentActor extends Actor {
     case RemoveStudent(studentId) =>
       // This Line calling removeStudent Function To DELETE Specific Student From Students Table
       studentDAO.removeStudent(studentId)
-      // Print This To Make Sure That The Student is Deleted
-      println(s"Student ${studentId} Deleted Succesfuly ")
       //Updates The Local Students Variable By Filtering Out The Removed Student
       students = students.filterNot(_.id == studentId)
       // Finally, It Sends The Updated List Of Students Back To The Sender
@@ -45,8 +39,6 @@ class StudentActor extends Actor {
     case UpdateStudent(student) =>
       // This Line calling updateStudent Function To UPDATE Specific Student's Data In Students Table
       studentDAO.updateStudent(student)
-      // Print This To Make Sure That The Student is Updated
-      println(s"Student ${student.id} Updated Succesfuly ")
       // Assuming you want to update the local students list as well
       students = students.map {
         case existingStudent if existingStudent.id == student.id => student

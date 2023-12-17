@@ -16,8 +16,6 @@ class TeacherActor extends Actor {
     case AddTeacher(teacher) =>
       // This Line calling addTeacher Function To INSERT New Teacher To Teachers Table
       TeacherDAO.addTeacher(teacher)
-      // Print This To Make Sure That The Teacher is Added
-      println(s"Teacher ${teacher.id} Added Succesfuly ")
       // Add New Teacher to the List "teachers"
       teachers = teachers :+ teacher
       // Finally, It Sends The Updated List Of Students Back To The Sender
@@ -28,8 +26,6 @@ class TeacherActor extends Actor {
     case RemoveTeacher(teacherId) =>
       // This Line calling removeTeacher Function To DELETE Specific Teacher From Teachers Table
       TeacherDAO.removeTeacher(teacherId)
-      // Print This To Make Sure That The Teacher is Deleted
-      println(s"Teacher ${teacherId} Deleted Succesfuly ")
       //Updates The Local teachers Variable By Filtering Out The Removed Student
       teachers = teachers.filterNot(_.id == teacherId)
       // Finally, It Sends The Updated List Of Students Back To The Sender
@@ -40,8 +36,6 @@ class TeacherActor extends Actor {
     case UpdateTeacher(teacher) =>
       // This Line calling UpdateTeacher Function To UPDATE Specific Teacher's Data In Teachers Table
       teacherDAO.updateTeacher(teacher)
-      // Print This To Make Sure That The Teacher is Updated
-      println(s"Teacher ${teacher.id} Updated Succesfuly ")
       // Assuming you want to update the local Teachers list as well
       teachers = teachers.map {
         case existingTeacher if existingTeacher.id == teacher.id => teacher
@@ -53,7 +47,7 @@ class TeacherActor extends Actor {
 
     // Handel Message Called "GetAllTeachers"
     case GetAllTeachers =>
-      // This Line calling GetAllTeachers Function To SELECT * From Students Table
+      // This Line calling GetAllTeachers Function To SELECT * From Teachers Table
       val allTeachers = teacherDAO.getAllTeachers()
       for (i <- 0 until allTeachers.length) {
         println("---------------------------")
@@ -63,6 +57,8 @@ class TeacherActor extends Actor {
         println("----------------------------")
       }
       sender() ! allTeachers
+
+
   }
 
 

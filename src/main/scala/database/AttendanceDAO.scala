@@ -15,6 +15,10 @@ object AttendanceDAO {
       preparedStatement.setInt(2, courseId)
       preparedStatement.setString(3, date)
       preparedStatement.executeUpdate()
+      println(s"Attendance For Student : ${studentId} For Course : ${courseId} Added Succesfuly ")
+    } catch {
+      case e: Exception =>
+        println("Student_id OR Course_id Is Not Exists")
     } finally {
       connection.close()
     }

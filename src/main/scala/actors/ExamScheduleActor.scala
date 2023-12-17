@@ -14,8 +14,6 @@ class ExamScheduleActor extends Actor {
     case AddExamSchedule(examSchedule) =>
       // This Line calling addExamSchedule Function To INSERT New ExamSchedule To exam_schedule Table
       ExamScheduleDAO.addExamSchedule(examSchedule)
-      // Print This To Make Sure That The ExamSchedule is Added
-      println(s"ExamSchedule ${examSchedule.courseId} Added Succesfuly ")
       // Add New ExamSchedule to the List "examSchedules"
       examSchedules = examSchedules :+ examSchedule
       // Finally, It Sends The Updated List Of examSchedules Back To The Sender
@@ -27,8 +25,6 @@ class ExamScheduleActor extends Actor {
     case RemoveExamSchedule(courseId) =>
       // This Line calling removeExamSchedule Function To DELETE Specific ExamSchedule From exam_schedule Table
       ExamScheduleDAO.removeExamSchedule(courseId)
-      // Print This To Make Sure That The ExamSchedule is Deleted
-      println(s"ExamSchedule ${courseId} Deleted Succesfuly ")
       //Updates The Local examSchedules Variable By Filtering Out The Removed ExamSchedule
       examSchedules = examSchedules.filterNot(_.courseId == courseId)
       // Finally, It Sends The Updated List Of examSchedules Back To The Sender

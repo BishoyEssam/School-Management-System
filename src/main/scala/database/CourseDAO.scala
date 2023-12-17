@@ -16,7 +16,12 @@ object CourseDAO {
       preparedStatement.setInt(1, course.id)
       preparedStatement.setString(2, course.name)
       preparedStatement.executeUpdate()
-    } finally {
+      // Print This To Make Sure That The Courses is Added
+      println(s"Course ${course.id} Added Succesfuly ")
+    } catch {
+      case e: Exception =>
+        println("This id Is Already Exists")
+    }finally {
       connection.close()
     }
   }
@@ -29,7 +34,12 @@ object CourseDAO {
       val preparedStatement: PreparedStatement = connection.prepareStatement(query)
       preparedStatement.setInt(1, courseId)
       preparedStatement.executeUpdate()
-    } finally {
+      // Print This To Make Sure That The Course is Deleted
+      println(s"Course ${courseId} Deleted Succesfuly ")
+    } catch {
+      case e: Exception =>
+        println("This id Not Exists")
+    }finally {
       connection.close()
     }
   }

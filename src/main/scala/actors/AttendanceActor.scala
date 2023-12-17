@@ -9,10 +9,14 @@ class AttendanceActor  extends  Actor{
       println(s"Adding attendance for student ${attendance.student_id} for course ${attendance.course_id}")
       AttendanceDAO.addAttendance(attendance.student_id, attendance.course_id, attendance.date)
       sender() ! Attendance(attendance.course_id, attendance.date, attendance.student_id, 1)
+
+
     case GetAttendanceForStudent(studentId) =>
       println(s"Getting attendance for student $studentId")
       AttendanceDAO.getAllAttendanceForStudent(studentId)
       sender() ! Attendance(1, "2019-01-01", studentId, 1)
+
+
     case GetAttendanceForCourse(courseId) =>
 
       println(s"Getting attendance for course $courseId")

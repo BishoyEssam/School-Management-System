@@ -1,13 +1,13 @@
 // Database.scala
 package org.school.app.dao
 
-import java.sql.{Connection, DriverManager}
+import java.sql.{Connection, DriverManager, SQLException}
 
 object Database {
-  private val url = "jdbc:mysql://localhost:8889/school_management"
+  private val url = "jdbc:mysql://localhost/school_management"
   private val driver = "com.mysql.cj.jdbc.Driver"
   private val username = "root"
-  private val password = "root"
+  private val password = ""
 
   // Establish a database connection
   def getConnection: Connection = {
@@ -20,6 +20,8 @@ object Database {
     } catch {
       case e: ClassNotFoundException =>
         throw new RuntimeException("Failed to load JDBC driver", e)
+      case e: SQLException =>
+        throw new RuntimeException("Failed to establish a database connection. Check if the database exists or if the connection parameters are correct.", e)
       case e: Exception =>
         throw new RuntimeException("Failed to establish a database connection", e)
     }

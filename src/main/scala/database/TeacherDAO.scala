@@ -1,6 +1,5 @@
 // TeacherDAO.scala
 package org.school.app.dao
-
 import java.sql.{Connection, PreparedStatement, ResultSet}
 import org.school.app.Teacher
 import scala.collection.mutable.ListBuffer
@@ -16,7 +15,13 @@ object TeacherDAO {
       preparedStatement.setString(2, teacher.name)
       preparedStatement.setString(3, teacher.subject)
       preparedStatement.executeUpdate()
-    } finally {
+      // Print This To Make Sure That The Teacher is Added
+      println(s"Teacher ${teacher.id} Added Succesfuly ")
+    }catch{
+      case e: Exception =>
+      println("This id Is Already Exists")
+    }
+    finally {
       connection.close()
     }
   }
@@ -29,7 +34,13 @@ object TeacherDAO {
       val preparedStatement: PreparedStatement = connection.prepareStatement(query)
       preparedStatement.setInt(1, teacherId)
       preparedStatement.executeUpdate()
-    } finally {
+      // Print This To Make Sure That The Teacher is Deleted
+      println(s"Teacher ${teacherId} Deleted Succesfuly ")
+    } catch {
+      case e: Exception =>
+        println("This id Not Exists")
+    }
+    finally {
       connection.close()
     }
   }
@@ -44,7 +55,13 @@ object TeacherDAO {
       preparedStatement.setString(2, teacher.subject)
       preparedStatement.setInt(3, teacher.id)
       preparedStatement.executeUpdate()
-    } finally {
+      // Print This To Make Sure That The Teacher is Updated
+      println(s"Teacher ${teacher.id} Updated Succesfuly ")
+    } catch {
+      case e: Exception =>
+        println("This id Not Exists")
+    }
+    finally {
       connection.close()
     }
   }
